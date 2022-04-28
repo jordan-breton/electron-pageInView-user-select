@@ -2,7 +2,7 @@
 
 Simple repository to create the simplest reproductible case to demonstrate electron `webContents::findInPage` bug with css `user-select: text`
 
-Just clone this project and launch it with `yarn start`
+Just clone this project, run `yarn install` and launch it with `yarn start`
 
 Type `lorem` in the search input, then try to navigate with `next` and `prev` buttons.
 
