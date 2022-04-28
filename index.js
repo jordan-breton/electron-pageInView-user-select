@@ -10,17 +10,9 @@ function createWindow () {
       contextIsolation : false
     }
   })
-  win.webContents.openDevTools();
+  
   ipcMain.on('search', (event, data) => {
     win.webContents.findInPage(data.txt, data.opts);
-  })
-  win.on('found-in-page', (event, result) => {
-    if (result.finalUpdate) {
-      win.webContents.send('search-result', {
-	total : result.matches,
-        current : result.activeMatchOrdinal
-      });
-    }
   })
 
   win.loadFile('index.html')
