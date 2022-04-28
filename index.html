@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>i18n files editor</title>
+	<style type="text/css">
+		*{
+			user-select: text;
+		}
+	</style>
+</head>
+<body>
+<div class="search">
+	<input type="text" id="search">
+	<button id="next">Next</button>
+	<button id="prev">Prev</button>
+</div>
+<div class="content">
+	Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ipsam magnam placeat rerum. Aliquam aliquid, aut cumque ducimus ipsa laborum nemo numquam odio omnis sint. Alias consectetur corporis cumque natus tempora.
+	Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cum expedita harum labore maxime quidem, rem repudiandae sit! Ad consequatur iure perspiciatis quos tempore! Aspernatur consequatur dolorum itaque maxime quos voluptate!
+	Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aspernatur, eaque, laudantium. Cum dolorum enim et excepturi incidunt laudantium magnam numquam officiis omnis quia. Aliquam amet dignissimos eveniet labore, perferendis saepe?
+	Lorem ipsum dolor sit amet, consectetur adipisicing elit. Blanditiis dolores doloribus eaque eum inventore laboriosam libero minus molestiae soluta tenetur? Consectetur dolore doloribus eligendi enim excepturi facere impedit iusto, nobis!
+</div>
+<span style="display:none">Lorem</span>
+<script>
+	const { ipcRenderer } = require('electron');
+	const input = document.getElementById('search');
+	const next = document.getElementById('next');
+	const prev = document.getElementById('prev');
+
+	input.addEventListener('input', () => {
+		ipcRenderer.send('search', {
+			txt : input.value,
+			opts : {
+				findNext : true
+			}
+		})
+	});
+
+	next.addEventListener('click', () => {
+		ipcRenderer.send('search', {
+			txt : input.value,
+			opts : {
+				findNext: false,
+				forward : true
+			}
+		});
+	});
+
+	prev.addEventListener('click', () => {
+		ipcRenderer.send('search',{
+			txt : input.value,
+			opts : {
+				findNext : false,
+				forward: false
+			}
+		})
+	});
+</script>
+</body>
+</html>
